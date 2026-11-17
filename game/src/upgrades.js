@@ -1,6 +1,4 @@
 // The boons offered between waves. Each card changes the player's numbers or the lantern's.
-import { LANTERN, PLAYER } from './config.js';
-
 export const UPGRADES = [
   {
     id: 'twin',
@@ -125,5 +123,3 @@ export function applyUpgrade(world, upgrade) {
 export function describeLevel(upgrade, world) {
   return upgrade.text(levelOf(world, upgrade.id));
 }
-
-export const BASE_STATS = { lanternHp: LANTERN.maxHp, playerHp: PLAYER.maxHp };

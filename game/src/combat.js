@@ -35,7 +35,7 @@ export function updateCombat(world, dt, audio) {
   updateTrail(world, dt, audio);
   applyNova(world, audio);
 
-  // The lantern's soft healing glow warms the player standing in it.
+  // Standing close to the lantern recharges the dash faster: a reason to fight near it.
   const near = Math.hypot(p.x - l.x, p.y - l.y) < l.lightRadius * 0.55;
   p.dashTimer = Math.max(0, p.dashTimer - (near ? dt * 0.6 : 0));
 }
@@ -240,12 +240,6 @@ function applyNova(world, audio) {
     }
   }
   floatText(world, blast.x, blast.y - 40, 'NOVA!', { color: COLORS.teal, size: 28, life: 0.9 });
-}
-
-export function enemyKindCount(world) {
-  const counts = {};
-  for (const e of world.enemies) counts[e.type] = (counts[e.type] || 0) + 1;
-  return counts;
 }
 
 export function totalThreat(world) {

@@ -1,5 +1,5 @@
 // The gloom: how each kind of enemy is created, how it moves and attacks, and what happens when it dies.
-import { ARENA_MARGIN, COLORS, ENEMY_TYPES, SCORE, VIEW, WAVES } from './config.js';
+import { COLORS, ENEMY_TYPES, SCORE, VIEW, WAVES } from './config.js';
 import { burst, floatText, ring, shake, showBanner } from './effects.js';
 
 export function spawnEnemy(world, type, x, y) {
@@ -244,9 +244,4 @@ export function killEnemy(world, e, audio) {
 
 export function comboMultiplier(world) {
   return 1 + Math.min(SCORE.comboCap - 1, Math.floor(world.combo / 3));
-}
-
-export function clampToArena(e) {
-  e.x = Math.min(VIEW.w - ARENA_MARGIN, Math.max(ARENA_MARGIN, e.x));
-  e.y = Math.min(VIEW.h - ARENA_MARGIN, Math.max(ARENA_MARGIN, e.y));
 }
