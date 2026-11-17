@@ -47,8 +47,10 @@ export function startWave(world, audio) {
     showBanner(world, 'Wave ' + world.wave, 'The Eclipse Maw rises', 2.6);
     audio.sfx.boss();
   } else {
-    showBanner(world, 'Wave ' + world.wave, world.wave === 1 ? 'Keep the lantern lit' : '', 1.8);
+    const omen = isBossWave(world.wave + 1);
+    showBanner(world, 'Wave ' + world.wave, world.wave === 1 ? 'Keep the lantern lit' : omen ? 'The sky is darkening. Something vast is coming' : '', omen ? 2.6 : 1.8);
     audio.sfx.waveStart();
+    if (omen) audio.sfx.omen();
   }
 }
 

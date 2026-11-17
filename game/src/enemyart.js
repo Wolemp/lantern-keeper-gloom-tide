@@ -154,9 +154,9 @@ export function drawEnemyEyes(ctx, e, player) {
 
   if (e.type === 'wraith' && e.state === 'windup') {
     ctx.save();
-    ctx.strokeStyle = 'rgba(255,61,110,' + (0.35 + 0.4 * Math.sin(e.timer * 40)) + ')';
-    ctx.lineWidth = 3;
-    ctx.setLineDash([10, 8]);
+    ctx.strokeStyle = e.locked ? 'rgba(255,240,240,0.95)' : 'rgba(255,61,110,' + (0.35 + 0.4 * Math.sin(e.timer * 40)) + ')';
+    ctx.lineWidth = e.locked ? 5 : 3;
+    ctx.setLineDash(e.locked ? [] : [10, 8]);
     ctx.beginPath();
     ctx.moveTo(e.x, e.y);
     const dx = e.aim.x - e.x;

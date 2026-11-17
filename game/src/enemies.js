@@ -91,7 +91,7 @@ export function updateEnemies(world, dt, audio) {
     } else if (e.type === 'brute') {
       steer(e, l.x, l.y, speed, dt, 2.5);
     } else if (e.type === 'wraith') {
-      updateWraith(world, e, dt, def, speed);
+      updateWraith(world, e, dt, def, speed, audio);
     } else if (e.type === 'maw') {
       updateMaw(world, e, dt, def, speed, audio);
     }
@@ -102,7 +102,7 @@ export function updateEnemies(world, dt, audio) {
   separate(world.enemies);
 }
 
-function updateWraith(world, e, dt, def, speed) {
+function updateWraith(world, e, dt, def, speed, audio) {
   const p = world.player;
   e.timer += dt;
   if (e.state === 'move') {
@@ -116,9 +116,15 @@ function updateWraith(world, e, dt, def, speed) {
   } else if (e.state === 'windup') {
     e.vx *= 1 - 6 * dt;
     e.vy *= 1 - 6 * dt;
-    e.aim = { x: p.x, y: p.y };
+    // The line tracks you for the first part of the windup, then locks: sidestep after the click.
+    if (!e.locked && e.timer >= def.windup * 0.55) {
+      e.locked = true;
+      audio.sfx.lock();
+    }
+    if (!e.locked) e.aim = { x: p.x, y: p.y };
     if (e.timer >= def.windup) {
       e.state = 'dash';
+      e.locked = false;
       e.timer = 0;
       const d = Math.hypot(e.aim.x - e.x, e.aim.y - e.y) || 1;
       e.vx = ((e.aim.x - e.x) / d) * def.dashSpeed;

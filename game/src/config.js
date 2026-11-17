@@ -59,7 +59,7 @@ export const ENEMY_TYPES = {
 
 export const WAVES = {
   baseBudget: 7,
-  budgetPerWave: 3.1,
+  budgetPerWave: 2.9,
   hpGrowth: 0.1,
   spawnGap: 0.55,
   bossEvery: 5,

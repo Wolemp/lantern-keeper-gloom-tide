@@ -89,7 +89,7 @@ export function createAudio() {
     nova: () => {
       tone({ freq: 140, to: 900, dur: 0.5, type: 'sawtooth', vol: 0.16 });
       tone({ freq: 280, to: 1400, dur: 0.5, type: 'sine', vol: 0.12 });
-      noise({ dur: 0.5, vol: 0.2, cutoff: 6000 });
+      noise({ dur: 0.5, vol: 0.14, cutoff: 6000 });
     },
     novaReady: () => {
       tone({ freq: 660, dur: 0.12, type: 'sine', vol: 0.12 });
@@ -106,8 +106,13 @@ export function createAudio() {
       [523, 659, 784].forEach((f, i) => tone({ freq: f, dur: 0.14, type: 'sine', vol: 0.14, delay: i * 0.06 }));
     },
     boss: () => {
-      tone({ freq: 70, to: 40, dur: 1.2, type: 'sawtooth', vol: 0.26 });
+      tone({ freq: 70, to: 40, dur: 1.2, type: 'sawtooth', vol: 0.21 });
       noise({ dur: 1.0, vol: 0.2, cutoff: 700 });
+    },
+    lock: () => tone({ freq: 1320, to: 1320, dur: 0.06, type: 'square', vol: 0.08 }),
+    omen: () => {
+      tone({ freq: 55, to: 48, dur: 1.6, type: 'sine', vol: 0.2 });
+      noise({ dur: 1.2, vol: 0.06, cutoff: 400 });
     },
     spit: () => tone({ freq: 420, to: 240, dur: 0.12, type: 'sine', vol: 0.08 }),
     gameOver: () => {
